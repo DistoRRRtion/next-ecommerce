@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useCartStore } from '@/store';
 import formatPrice from '@/util/PriceFormat';
+import { IoAddCircle, IoRemoveCircle } from 'react-icons/io5';
 
 export default function Cart() {
   const cartStore = useCartStore();
@@ -28,7 +29,37 @@ export default function Cart() {
             />
             <div>
               <h2>{el.name}</h2>
-              <h2>Quantity: {el.quantity}</h2>
+              <div className="flex gap-3">
+                <h2>Quantity: {el.quantity}</h2>
+                <button
+                  className="text-2xl"
+                  onClick={() =>
+                    cartStore.removeProduct({
+                      id: el.id,
+                      image: el.image,
+                      name: el.name,
+                      unit_amount: el.unit_amount,
+                      quantity: el.quantity,
+                    })
+                  }
+                >
+                  <IoRemoveCircle />
+                </button>
+                <button
+                  className="text-2xl"
+                  onClick={() =>
+                    cartStore.addProduct({
+                      id: el.id,
+                      image: el.image,
+                      name: el.name,
+                      unit_amount: el.unit_amount,
+                      quantity: el.quantity,
+                    })
+                  }
+                >
+                  <IoAddCircle />
+                </button>
+              </div>
               <p>{el.unit_amount && formatPrice(el.unit_amount)}</p>
             </div>
           </div>
