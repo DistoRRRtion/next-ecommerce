@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { SearchParamTypes } from '@/types/SearchParamTypes';
 import formatPrice from '@/util/PriceFormat';
+import AddCard from './AddCart';
 
 export default async function Product({ searchParams }: SearchParamTypes) {
   // console.log(searchParams);
@@ -22,9 +23,10 @@ export default async function Product({ searchParams }: SearchParamTypes) {
             {searchParams.unit_amount && formatPrice(searchParams.unit_amount)}
           </p>
         </div>
-        <button className="bg-teal-600 text-white py-2 px-6 my-10 rounded-md">
+        {/* <button className="bg-teal-600 text-white py-2 px-6 my-10 rounded-md">
           Add To Card
-        </button>
+        </button> */}
+        <AddCard {...searchParams} />
       </div>
     </div>
   );

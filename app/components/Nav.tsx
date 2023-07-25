@@ -11,22 +11,31 @@ import { AiFillShopping } from 'react-icons/ai';
 
 export default function Nav({ user }: Session) {
   const cartStore = useCartStore();
+  console.log(cartStore.isOpen);
   return (
     <>
       <nav className="flex justify-between items-center py-8">
         <Link href={'/'}>Logo</Link>
         <ul className="flex gap-12 items-center">
-          <li className="flex items-center text-3xl relative cursor-pointer">
+          {/*Togle the card*/}
+          <li
+            onClick={() => cartStore.toggleCart()}
+            className="flex items-center text-3xl relative cursor-pointer"
+          >
             <AiFillShopping />
             <span className="bg-teal-500 text-white text-sm font-medium w-7 h-7 rounded-full absolute left-4 bottom-4 flex items-center justify-center">
               {cartStore.cart.length}
             </span>
           </li>
+
+          {/*if user is not signed in */}
           {!user && (
             <li className="bg-teal-600 text-white px-4 py-2 rounded-md">
               <button onClick={() => signIn()}>Sign in</button>
             </li>
           )}
+
+          {/*if user is signed in*/}
           {user && (
             <>
               <li className="bg-red-500 text-white px-4 py-2 rounded-md">
