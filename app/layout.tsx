@@ -3,7 +3,7 @@ import './globals.css';
 import { getServerSession } from 'next-auth/next';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
-import Nav from './copmponents/Nav';
+import Nav from './components/Nav';
 
 export const metadata = {
   title: 'econ',
