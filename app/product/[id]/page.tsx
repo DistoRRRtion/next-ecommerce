@@ -7,12 +7,13 @@ export default async function Product({ searchParams }: SearchParamTypes) {
   // console.log(searchParams);
 
   return (
-    <div className="flex justify-between gap-96 p-12 text-gray-700">
+    <div className="flex flex-col justify-between gap-24 p-23 text-gray-700 xl:flex-row ">
       <Image
         src={searchParams.image}
         alt={searchParams.name}
         width={400}
         height={400}
+        className="object-cover"
       />
       <div className="font-medium text-gray-600">
         <h1 className="text-2xl  py-2">{searchParams.name}</h1>

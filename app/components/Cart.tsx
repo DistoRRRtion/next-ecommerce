@@ -3,7 +3,11 @@
 import Image from 'next/image';
 import { useCartStore } from '@/store';
 import formatPrice from '@/util/PriceFormat';
-import { IoAddCircle, IoRemoveCircle } from 'react-icons/io5';
+import {
+  IoAddCircle,
+  IoRemoveCircle,
+  IoArrowUndoOutline,
+} from 'react-icons/io5';
 import basket from '@/public/pngaaa.com-293011.png';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -25,8 +29,15 @@ export default function Cart() {
       <motion.div
         layout
         onClick={(e) => e.stopPropagation()}
-        className="bg-white absolute right-0 top-0 w-1/4 h-screen p-12 overflow-y-scroll text-gray-700"
+        className="bg-white absolute right-0 top-0 w-full lg:w-1/4 h-screen p-12 overflow-y-scroll text-gray-700"
       >
+        <button
+          onClick={() => cartStore.toggleCart()}
+          className="text-sm font-bold pb-12 flex gap-2"
+        >
+          <IoArrowUndoOutline />
+          Back to store
+        </button>
         {cartStore.cart.map((el) => (
           <motion.div layout key={el.id} className="flex p-4 gap-4">
             <Image
