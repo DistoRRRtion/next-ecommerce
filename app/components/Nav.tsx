@@ -8,10 +8,10 @@ import Image from 'next/image';
 import Cart from './Cart';
 import { useCartStore } from '@/store';
 import { AiFillShopping } from 'react-icons/ai';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Nav({ user }: Session) {
   const cartStore = useCartStore();
-  console.log(cartStore.isOpen);
   return (
     <>
       <nav className="flex justify-between items-center py-8">
@@ -23,9 +23,18 @@ export default function Nav({ user }: Session) {
             className="flex items-center text-3xl relative cursor-pointer"
           >
             <AiFillShopping />
-            <span className="bg-teal-500 text-white text-sm font-medium w-7 h-7 rounded-full absolute left-4 bottom-4 flex items-center justify-center">
-              {cartStore.cart.length}
-            </span>
+            <AnimatePresence>
+              {cartStore.cart.length > 0 && (
+                <motion.span
+                  animate={{ scale: 1 }}
+                  initial={{ scale: 0 }}
+                  // exit={{ scale: 0 }}
+                  className="bg-teal-500 text-white text-sm font-medium w-7 h-7 rounded-full absolute left-4 bottom-4 flex items-center justify-center"
+                >
+                  {cartStore.cart.length}
+                </motion.span>
+              )}
+            </AnimatePresence>
           </li>
 
           {/*if user is not signed in */}
@@ -53,7 +62,7 @@ export default function Nav({ user }: Session) {
             </>
           )}
         </ul>
-        {cartStore.isOpen && <Cart />}
+        <AnimatePresence>{cartStore.isOpen && <Cart />}</AnimatePresence>
       </nav>
     </>
   );
