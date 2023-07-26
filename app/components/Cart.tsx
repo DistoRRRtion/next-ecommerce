@@ -8,7 +8,11 @@ import basket from '@/public/pngaaa.com-293011.png';
 
 export default function Cart() {
   const cartStore = useCartStore();
-  // console.log(cartStore);
+
+  // total price
+  const totalPrice = cartStore.cart.reduce((acc, item) => {
+    return acc + item.unit_amount! * item.quantity!;
+  }, 0);
   return (
     <div
       onClick={() => cartStore.toggleCart()}
@@ -18,7 +22,6 @@ export default function Cart() {
         onClick={(e) => e.stopPropagation()}
         className="bg-white absolute right-0 top-0 w-1/4 h-screen p-12 overflow-y-scroll text-gray-700"
       >
-        <h1>Here's your shopping list 📃</h1>
         {cartStore.cart.map((el) => (
           <div key={el.id} className="flex p-4 gap-4">
             <Image
@@ -67,7 +70,7 @@ export default function Cart() {
         ))}
         {cartStore.cart.length > 0 && (
           <button className="py-2 mt-4 bg-teal-600 w-full rounded-md text-white">
-            Checkout
+            Checkout: {formatPrice(totalPrice)}
           </button>
         )}
         {!cartStore.cart.length && (
