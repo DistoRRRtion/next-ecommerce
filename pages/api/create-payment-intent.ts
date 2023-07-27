@@ -21,10 +21,12 @@ export default async function handler(
 ) {
   // get user
   const userSession = await getServerSession(req, res, authOptions);
+
   if (!userSession?.user) {
     res.status(403).json({
       message: 'not Logged in',
     });
+    return;
   }
 
   //extract the data from the body
