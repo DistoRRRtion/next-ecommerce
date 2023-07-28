@@ -26,13 +26,15 @@ export default function Checkout() {
       }),
     })
       .then((res) => {
-        if (res.status === 404) {
+        if (res.status === 403) {
           return router.push('/api/auth/signin');
         }
         return res.json();
       })
       .then((data) => {
         console.log(data);
+        setClientSecret(data.paymentIntent.client_secret);
+        cartStore.setPaymentIntent(data.paymentIntent.id);
       });
   }, []);
 
