@@ -2,15 +2,6 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { AddCartType } from './types/AddCartType';
 
-// type CartItem = {
-//   name: string;
-//   id: string;
-//   images?: string[];
-//   description?: string;
-//   unit_amount: number;
-//   quantity: number;
-// };
-
 type CartState = {
   isOpen: boolean;
   cart: AddCartType[];

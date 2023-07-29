@@ -7,6 +7,7 @@ import {
   IoAddCircle,
   IoRemoveCircle,
   IoArrowUndoOutline,
+  IoBasketOutline,
 } from 'react-icons/io5';
 import basket from '@/public/pngaaa.com-293011.png';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -32,13 +33,26 @@ export default function Cart() {
         onClick={(e) => e.stopPropagation()}
         className="bg-white absolute right-0 top-0 w-full lg:w-1/4 h-screen p-12 overflow-y-scroll text-gray-700"
       >
-        <button
-          onClick={() => cartStore.toggleCart()}
-          className="text-sm font-bold pb-12 flex gap-2"
-        >
-          <IoArrowUndoOutline />
-          Back to store
-        </button>
+        {cartStore.onCheckout === 'cart' && (
+          <button
+            onClick={() => cartStore.toggleCart()}
+            className="text-sm font-bold pb-12 flex gap-2"
+          >
+            <IoArrowUndoOutline />
+            Back to store
+          </button>
+        )}
+
+        {cartStore.onCheckout === 'checkout' && (
+          <button
+            onClick={() => cartStore.setCheckout('cart')}
+            className="text-sm font-bold pb-12 flex gap-2"
+          >
+            Check your cart
+            <IoBasketOutline />
+          </button>
+        )}
+
         {/* Cart Items */}
         {cartStore.onCheckout === 'cart' && (
           <>
@@ -92,14 +106,14 @@ export default function Cart() {
         )}
 
         <motion.div layout>
-          {cartStore.cart.length > 0 && (
+          {cartStore.cart.length > 0 && cartStore.onCheckout === 'cart' ? (
             <button
               onClick={() => cartStore.setCheckout('checkout')}
               className="py-2 mt-4 bg-teal-600 w-full rounded-md text-white"
             >
               Checkout: {formatPrice(totalPrice)}
             </button>
-          )}
+          ) : null}
         </motion.div>
 
         {/* checkout form */}
