@@ -48,23 +48,43 @@ export default function Nav({ user }: Session) {
           {user && (
             <>
               <li>
-                <button
-                  className="bg-red-500 text-white px-4 py-2 rounded-md"
-                  onClick={() => signOut()}
-                >
-                  Sign Out
-                </button>
-              </li>
-              <li>
-                <Link href="/dashboard">
+                <div className="dropdown dropdown-end cursor-pointer">
                   <Image
                     className="rounded-full"
                     src={user?.image as string}
                     alt={user.name as string}
                     width={48}
                     height={48}
+                    tabIndex={0}
                   />
-                </Link>
+                  <ul
+                    tabIndex={0}
+                    className="dropdown-content menu p-4 space-y-4 shadow bg-base-100 rounded-box w-72"
+                  >
+                    <Link
+                      className="hover:bg-base-300 rounded-md p-4"
+                      href={'/dashboard'}
+                      onClick={() => {
+                        if (document.activeElement instanceof HTMLElement) {
+                          document.activeElement.blur();
+                        }
+                      }}
+                    >
+                      Orders
+                    </Link>
+                    <li
+                      className="hover:bg-base-300 rounded-md p-4"
+                      onClick={() => {
+                        if (document.activeElement instanceof HTMLElement) {
+                          document.activeElement.blur();
+                        }
+                        signOut();
+                      }}
+                    >
+                      Sign Out
+                    </li>
+                  </ul>
+                </div>
               </li>
             </>
           )}
