@@ -29,7 +29,7 @@ export default function Nav({ user }: Session) {
                   animate={{ scale: 1 }}
                   initial={{ scale: 0 }}
                   // exit={{ scale: 0 }}
-                  className="bg-teal-500 text-white text-sm font-medium w-7 h-7 rounded-full absolute left-4 bottom-4 flex items-center justify-center"
+                  className="bg-primary text-white text-sm font-medium w-7 h-7 rounded-full absolute left-4 bottom-4 flex items-center justify-center"
                 >
                   {cartStore.cart.length}
                 </motion.span>
@@ -39,7 +39,7 @@ export default function Nav({ user }: Session) {
 
           {/*if user is not signed in */}
           {!user && (
-            <li className="bg-teal-600 text-white px-4 py-2 rounded-md">
+            <li className="bg-primary text-white px-4 py-2 rounded-md">
               <button onClick={() => signIn()}>Sign in</button>
             </li>
           )}

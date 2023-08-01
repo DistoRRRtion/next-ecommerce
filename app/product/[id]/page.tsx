@@ -15,12 +15,12 @@ export default async function Product({ searchParams }: SearchParamTypes) {
         height={800}
         className="object-cover w-68 xl:w-1/2"
       />
-      <div className="font-medium text-gray-600">
+      <div className="font-medium">
         <h1 className="text-2xl  py-2">{searchParams.name}</h1>
         <p className="py-2">{searchParams.description}</p>
         <p className="py-2">{searchParams.features}</p>
         <div>
-          <p className="font-bold text-teal-600">
+          <p className="font-bold text-primary">
             {searchParams.unit_amount && formatPrice(searchParams.unit_amount)}
           </p>
         </div>

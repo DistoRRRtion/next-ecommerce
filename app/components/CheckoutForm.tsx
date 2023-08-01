@@ -54,11 +54,11 @@ export default function CheckoutForm({
   };
 
   return (
-    <form onSubmit={handlerSubmit} id="payment-form" className="text-gray-500">
+    <form onSubmit={handlerSubmit} id="payment-form">
       <PaymentElement id="payment-element" options={{ layout: 'tabs' }} />
       <h1 className="mt-4 font-bold text-xl">Total: {formatedPrice}</h1>
       <button
-        className="py-2 px-4 bg-teal-500 mt-4 w-full rounded-md text-white disabled:opacity-25"
+        className="py-2 px-4 bg-primary mt-4 w-full rounded-md text-white disabled:opacity-25"
         id="submit"
         disabled={isLoading || !stripe || !elements}
       >
