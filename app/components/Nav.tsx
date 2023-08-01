@@ -47,17 +47,24 @@ export default function Nav({ user }: Session) {
           {/*if user is signed in*/}
           {user && (
             <>
-              <li className="bg-red-500 text-white px-4 py-2 rounded-md">
-                <button onClick={() => signOut()}>Sign Out</button>
+              <li>
+                <button
+                  className="bg-red-500 text-white px-4 py-2 rounded-md"
+                  onClick={() => signOut()}
+                >
+                  Sign Out
+                </button>
               </li>
               <li>
-                <Image
-                  className="rounded-full"
-                  src={user?.image as string}
-                  alt={user.name as string}
-                  width={48}
-                  height={48}
-                />
+                <Link href="/dashboard">
+                  <Image
+                    className="rounded-full"
+                    src={user?.image as string}
+                    alt={user.name as string}
+                    width={48}
+                    height={48}
+                  />
+                </Link>
               </li>
             </>
           )}

@@ -15,7 +15,7 @@ const fetchOrders = async () => {
     return null;
   }
   const orders = await prisma.order.findMany({
-    where: { userId: user?.user?.id },
+    where: { userId: user?.user?.id, status: 'complete' },
     include: { products: true },
   });
 
@@ -43,39 +43,44 @@ export default async function Dashboard() {
 
   return (
     <div>
-      <div className="font-medium">
+      <div>
         {orders.map((order) => (
-          <div className="rounded-lg mb-12 bg-gray-100 p-4" key={order.id}>
-            <h2>Order Reference: {order.id}</h2>
-            <p>Time: {order.createdDate.toLocaleString()}</p>
-            <p className="text-md p-y2">
+          <div
+            className="rounded-lg my-8 bg-gray-100 p-4 space-y-2"
+            key={order.id}
+          >
+            <h2 className="text-xs font-medium">Order Reference: {order.id}</h2>
+            <p className="text-xs">
               Status:
               <span
                 className={`${
-                  order.status === 'complete' ? 'bg-green-500' : 'bg-red-500'
+                  order.status === 'complete' ? 'bg-green-500' : 'bg-orange-500'
                 } text-white px-2 py-1 rounded-md text-sm ml-2`}
               >
                 {order.status}
               </span>
             </p>
-            <p className="font-medium">Total: {formatPrice(order.amount)}</p>
-            <div className="flex gap-8">
+            <p className="text-xs">
+              Time: {order.createdDate.toLocaleString()}
+            </p>
+            <div className="text-sm lg:flex gap-8 items-center">
               {order.products.map((prod) => (
-                <div className="py-2 " key={prod.id}>
+                <div className="py-2" key={prod.id}>
                   <h2 className="py-2">{prod.name}</h2>
-                  <p>Quantity: {prod.quantity}</p>
-                  <p>Price: {formatPrice(prod.unit_amount)}</p>
-                  <div className="flex items-center gap-4">
+                  <div className="flex gap-6 items-center">
                     <Image
                       src={prod.image!}
                       alt={prod.name}
                       width={50}
                       height={50}
                     ></Image>
+                    <p>Price: {formatPrice(prod.unit_amount)}</p>
+                    <p>Quantity: {prod.quantity}</p>
                   </div>
                 </div>
               ))}
             </div>
+            <p className="font-medium">Total: {formatPrice(order.amount)}</p>
           </div>
         ))}
       </div>
