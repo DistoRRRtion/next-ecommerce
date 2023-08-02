@@ -1,5 +1,5 @@
 import { getServerSession } from 'next-auth';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '@/util/prisma';
 import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import formatPrice from '@/util/PriceFormat';
 import Image from 'next/image';
@@ -7,8 +7,6 @@ import Image from 'next/image';
 export const revalidate = 0;
 
 const fetchOrders = async () => {
-  const prisma = new PrismaClient();
-
   const user = await getServerSession(authOptions);
 
   if (!user) {
@@ -73,6 +71,7 @@ export default async function Dashboard() {
                       alt={prod.name}
                       width={50}
                       height={50}
+                      priority={true}
                     ></Image>
                     <p>Price: {formatPrice(prod.unit_amount)}</p>
                     <p>Quantity: {prod.quantity}</p>
