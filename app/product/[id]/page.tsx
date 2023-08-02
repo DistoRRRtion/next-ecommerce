@@ -7,7 +7,7 @@ export default async function Product({ searchParams }: SearchParamTypes) {
   // console.log(searchParams);
 
   return (
-    <div className="flex flex-col xl:flex-row items-center justify-between gap-24  text-gray-700  ">
+    <div className="flex flex-col xl:flex-row items-center justify-between gap-24">
       <Image
         src={searchParams.image}
         alt={searchParams.name}

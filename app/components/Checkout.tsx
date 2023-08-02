@@ -8,7 +8,6 @@ import { useRouter } from 'next/navigation';
 import CheckoutForm from './CheckoutForm';
 import OrderAnimation from './OrderAnimation';
 import { motion } from 'framer-motion';
-import { transcode } from 'buffer';
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
